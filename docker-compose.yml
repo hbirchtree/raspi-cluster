@@ -1,0 +1,51 @@
+version: '2'
+
+services:
+    nginxhost:
+        image: ckulka/rpi-nginx
+        environment:
+          - NGINX_NO_UPDATE=1
+        ports:
+          - "80:80"
+        volumes:
+          - ./nginxconfig/:/etc/nginx/sites-enabled
+          - /var/www/html:/var/www/html
+        networks:
+          - backend
+          - frontend
+
+    buildserver:
+        build:
+            context: .
+            dockerfile: Dockerfile.build-server
+        ports:
+          - "5000:5000"
+        volumes:
+          - ./cbd/build-server/:/var/server
+          - buildstore:/var/server/store
+        networks:
+          - backend
+     
+    hostdisco:
+        build:
+            context: .
+            dockerfile: Dockerfile.host-discovery
+        ports:
+          - "5001:5001"
+        volumes:
+          - ./host-discovery/:/var/server
+          - hoststore:/var/server/store
+        networks:
+          - backend
+    
+volumes:
+    hoststore:
+        driver: local
+    buildstore:
+        driver: local
+        
+networks:
+     frontend:
+        driver: bridge
+     backend:
+        driver: bridge

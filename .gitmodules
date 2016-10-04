@@ -1,0 +1,6 @@
+[submodule "host-discovery"]
+	path = host-discovery
+	url = https://github.com/hbirchtree/host-discovery-channel.git
+[submodule "cbd"]
+	path = cbd
+	url = https://github.com/hbirchtree/coffeecutie-build-daemon.git

@@ -1,0 +1,18 @@
+server {
+    listen 80;
+
+    root /var/www/html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location /builds/ {
+        rewrite ^/builds/(.*) /$1 break;
+        proxy_pass  http://buildserver:5000/;
+    }
+    location /hosts/ {
+        rewrite ^/hosts/(.*) /$1 break;
+            proxy_pass  http://hostdisco:5001/;
+    }
+}
