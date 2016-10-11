@@ -18,8 +18,6 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.build-server
-        ports:
-          - "5000:5000"
         volumes:
           - ./cbd/build-server/:/var/server
           - buildstore:/var/server/store
@@ -30,18 +28,36 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.host-discovery
-        ports:
-          - "5001:5001"
         volumes:
           - ./host-discovery/:/var/server
           - hoststore:/var/server/store
         networks:
           - backend
     
+    hostscanner:
+        build:
+            context: .
+            dockerfile: Dockerfile.host-scanner
+        volumes:
+          - ./host-discovery/:/var/server
+          - hoststore:/var/server/store
+        network_mode: "host"
+    jenkins:
+        build:
+            context: .
+            dockerfile: Dockerfile.jenkins
+        ports:
+          - "8080:8080"
+        network_mode: "host"
+        volumes:
+          - jenkins_store:/var/jenkins_home
+
 volumes:
     hoststore:
         driver: local
     buildstore:
+        driver: local
+    jenkins_store:
         driver: local
         
 networks:

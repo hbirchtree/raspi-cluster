@@ -1,0 +1,4 @@
+FROM privateport/alpine-rpi:3.3
+
+RUN apk update && apk add \
+    mysql

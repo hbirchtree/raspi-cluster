@@ -13,6 +13,10 @@ server {
     }
     location /hosts/ {
         rewrite ^/hosts/(.*) /$1 break;
-            proxy_pass  http://hostdisco:5001/;
+        proxy_pass  http://hostdisco:5001/;
+    }
+    location /jenkins/ {
+        rewrite ^/jenkins/(.*) /$1 break;
+        proxy_pass http://localhost:8080/;
     }
 }

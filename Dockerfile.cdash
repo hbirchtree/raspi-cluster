@@ -1,0 +1,6 @@
+FROM privateport/alpine-rpi:3.3
+
+RUN apk update && apk add \
+    mysql php5-mysql \
+    git \
+    php5-curl php5-gd php5-xsl
