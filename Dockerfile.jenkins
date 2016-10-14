@@ -1,7 +1,7 @@
 FROM dilgerm/rpi-jenkins
 
 USER root
-RUN apt-get -qy update && apt-get -qy install unzip
+RUN apt-get -qy update && apt-get -qy install unzip git mercurial
 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
