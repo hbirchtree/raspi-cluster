@@ -5,11 +5,11 @@ RUN apt-get -qy update && apt-get -qy install unzip git mercurial
 
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-COPY jenkinsconfig/plugins.txt /usr/share/jenkins/plugins.txt
+COPY jenkinsconfig/jenkins/jenkins/plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
-COPY jenkinsconfig/*.groovy /usr/share/jenkins/ref/init.groovy.d/
-COPY jenkinsconfig/*.properties $JENKINS_HOME/
+COPY jenkinsconfig/jenkins/jenkins/*.groovy /usr/share/jenkins/ref/init.groovy.d/
+COPY jenkinsconfig/jenkins/jenkins/*.properties $JENKINS_HOME/
 
 USER jenkins
 WORKDIR /

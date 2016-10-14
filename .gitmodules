@@ -4,3 +4,6 @@
 [submodule "cbd"]
 	path = cbd
 	url = https://github.com/hbirchtree/coffeecutie-build-daemon.git
+[submodule "jenkinsconfig"]
+	path = jenkinsconfig
+	url = https://github.com/hbirchtree/coffeecutie-automation-tools.git
