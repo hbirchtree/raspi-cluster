@@ -1,8 +1,9 @@
 FROM resin/rpi-raspbian:jessie
 
-RUN apt-get -qy update && apt-get install \
-	git python3 python3-flask python3-werkzeug
-	
-RUN apt-get -qy install nmap iproute2 cron
+# The script needs to launch the discovery script, which needs the Python dependencies.
+# Not very good, but it works
+RUN apt-get -qq update && apt-get -qy install \
+    python3 python3-flask python3-werkzeug \
+    nmap iproute2 cron net-tools
 
 CMD /var/server/update-hosts.sh && cron && tail -f /dev/null
