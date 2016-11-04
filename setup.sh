@@ -14,3 +14,9 @@ curl -sSL https://get.docker.com | sh
 # We use docker-compose from Pip because it is up to date
 pip install docker-compose
 
+# Installing the raspi-cluster service
+ln -s $(pwd) /srv/raspi-cluster
+cp raspi-cluster.service /etc/systemd/system
+systemctl daemon-reload
+systemctl start raspi-cluster.service
+systemctl enable raspi-cluster.service
